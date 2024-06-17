@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ItemModel {
-  final String header;
-  final Widget Function() contentBuilder;
+  Widget content;
+  bool isExpanded;
 
-  ItemModel({required this.header, required this.contentBuilder});
+  ItemModel({required this.content, this.isExpanded = false});
 }

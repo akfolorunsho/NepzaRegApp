@@ -5,12 +5,13 @@ class PhotoBox extends StatefulWidget {
   final double width;
   final double height;
   final Function(String)? onImageSelected;
+  bool isSignature;
 
-  PhotoBox({
-    this.width = 150.0,
-    this.height = 150.0,
-    this.onImageSelected,
-  });
+  PhotoBox(
+      {this.width = 150.0,
+      this.height = 150.0,
+      this.onImageSelected,
+      this.isSignature = false});
 
   @override
   _PhotoBoxState createState() => _PhotoBoxState();
@@ -42,6 +43,7 @@ class _PhotoBoxState extends State<PhotoBox> {
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border.all(color: Colors.black87),
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -50,11 +52,16 @@ class _PhotoBoxState extends State<PhotoBox> {
                 _image!,
                 fit: BoxFit.cover,
               )
-            : const Center(
-                child: Icon(
-                  Icons.add_a_photo,
-                  color: Colors.grey,
-                ),
+            : Center(
+                child: widget.isSignature != true
+                    ? const Icon(
+                        Icons.add_a_photo,
+                        color: Colors.grey,
+                      )
+                    : const Text(
+                        'Upload Signature',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
               ),
       ),
     );

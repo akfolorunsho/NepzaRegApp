@@ -58,7 +58,7 @@ class DirectorWidget extends StatelessWidget {
             ),
             CustomTextFormField(
               label: 'ID Number',
-              width: 300.w,
+              width: 200.w,
             )
           ]),
         ),
@@ -70,6 +70,38 @@ class DirectorWidget extends StatelessWidget {
           minLines: 3,
           maxLines: 3,
           inputType: TextInputType.streetAddress,
+        ),
+        SizedBox(
+          height: 28.h,
+        ),
+        Divider(
+          color: Colors.white,
+          indent: 92.w,
+          endIndent: 92.w,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Icon(Icons.picture_as_pdf),
+            const Text(' '),
+            TextButton(onPressed: () {}, child: const Text('Select File'))
+          ],
+        ),
+        Divider(
+          color: Colors.white,
+          indent: 92.w,
+          endIndent: 92.w,
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 95.w, top: 16.h),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: PhotoBox(
+              height: 92.h,
+              width: 125.w,
+              isSignature: true,
+            ),
+          ),
         ),
         SizedBox(
           height: 68.h,

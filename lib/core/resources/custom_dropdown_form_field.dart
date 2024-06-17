@@ -9,7 +9,7 @@ class CustomDropdownFormField extends StatefulWidget {
   final double width;
   final FormFieldValidator<String>? validator;
 
-  const CustomDropdownFormField({
+  CustomDropdownFormField({
     super.key,
     required this.items,
     this.initialValue,
