@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nepza/core/fonts/big_title.dart';
+import 'package:nepza/core/fonts/body_txt.dart';
 import 'package:nepza/core/fonts/small_title.dart';
 import 'package:nepza/core/fonts/sub_title1.dart';
 import 'package:nepza/core/resources/button.dart';
 import 'package:nepza/core/resources/colours.dart';
+import 'package:nepza/core/resources/custom_text_form_field.dart';
+import 'package:nepza/core/resources/director_widget.dart';
 import 'package:nepza/core/resources/item_model.dart';
+import 'package:nepza/core/resources/shareholder_widget.dart';
 
-import '../../../core/resources/director_widget.dart';
 import '../../../core/resources/logo.dart';
 import '../../../core/resources/media.dart';
 
@@ -22,8 +25,8 @@ class ShareholdersDetails extends StatefulWidget {
 class _ShareholdersDetailsState extends State<ShareholdersDetails> {
   bool isChecked = false;
   GlobalKey key = GlobalKey<FormFieldState>();
-  List<ItemModel> directors = [
-    ItemModel(content: const DirectorWidget(), isExpanded: true),
+  List<ItemModel> shareholders = [
+    ItemModel(content: ShareholderWidget(), isExpanded: true),
   ];
 
   @override
@@ -108,7 +111,7 @@ class _ShareholdersDetailsState extends State<ShareholdersDetails> {
       width: MediaQuery.of(context).size.width,
       color: Colours.secondaryColor,
       child: Padding(
-        padding: EdgeInsets.all(24.h),
+        padding: EdgeInsets.all(28.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -119,13 +122,29 @@ class _ShareholdersDetailsState extends State<ShareholdersDetails> {
               child: TextButton(
                   onPressed: () {
                     setState(() {
-                      directors.add(ItemModel(content: const DirectorWidget()));
+                      shareholders.add(ItemModel(content: ShareholderWidget()));
                     });
                   },
                   child: const SubTitle1(
                     txt: '+   Add a Director',
                   )),
             ),
+            SizedBox(
+              height: 72.h,
+            ),
+            Divider(
+              color: Colors.white,
+              indent: 10.w,
+              endIndent: 10.w,
+            ),
+            SizedBox(
+              height: 28.h,
+            ),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: SubTitle1(txt: 'Witness to Signature'),
+            ),
+            const DirectorWidget(),
             SizedBox(
               height: 72.h,
             ),
@@ -143,7 +162,37 @@ class _ShareholdersDetailsState extends State<ShareholdersDetails> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SmallTitle(txt: 'Fill Director(s) Details'),
+          const SmallTitle(txt: 'Fill Shareholder(s) Details'),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BodyText(
+                  txt: '1.   The liability of the members are limited',
+                  fontWeight: FontWeight.bold,
+                ),
+                BodyText(
+                  txt: '2.   The company is a private company',
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 24.h,
+          ),
+          CustomTextFormField(
+            label: 'Share Capital',
+            inputType: TextInputType.number,
+          ),
+          SizedBox(
+            height: 24.h,
+          ),
+          CustomTextFormField(
+            label: 'Divided into',
+            inputType: TextInputType.number,
+          ),
           SizedBox(
             height: 72.h,
           ),
@@ -152,21 +201,22 @@ class _ShareholdersDetailsState extends State<ShareholdersDetails> {
             elevation: 0,
             expansionCallback: (int index, bool isExpanded) {
               setState(() {
-                directors[index].isExpanded = isExpanded;
+                shareholders[index].isExpanded = isExpanded;
               });
             },
-            children: directors.map<ExpansionPanel>((director) {
+            children: shareholders.map<ExpansionPanel>((shareholder) {
               return ExpansionPanel(
                 backgroundColor: Colours.secondaryColor,
                 headerBuilder: (context, isExpanded) {
                   return SubTitle1(
-                    txt: '${directors.indexOf(director) + 1}. Director',
+                    txt:
+                        '${shareholders.indexOf(shareholder) + 1}. Shareholder',
                   );
                 },
                 body: Column(
                   children: [
-                    director.content,
-                    directors.indexOf(director) == 0
+                    shareholder.content,
+                    shareholders.indexOf(shareholder) == 0
                         ? const SizedBox()
                         : IconButton(
                             onPressed: () {
@@ -176,7 +226,7 @@ class _ShareholdersDetailsState extends State<ShareholdersDetails> {
                           ),
                   ],
                 ),
-                isExpanded: director.isExpanded,
+                isExpanded: shareholder.isExpanded,
               );
             }).toList(),
           ),

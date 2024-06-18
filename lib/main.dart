@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nepza/core/resources/colours.dart';
-import 'package:nepza/register/presentation/pages/director_details.dart';
+import 'package:nepza/register/presentation/pages/register_landing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                   ColorScheme.fromSeed(seedColor: Colours.primaryColor),
               useMaterial3: true,
             ),
-            home: const DirectorDetails(),
+            home: const RegisterLanding(),
           );
         });
   }
